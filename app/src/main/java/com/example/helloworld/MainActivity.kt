@@ -22,9 +22,28 @@ class MainActivity : AppCompatActivity() {
         tabs.setupWithViewPager(viewPager)
         val fab: FloatingActionButton = findViewById(R.id.fab)
 
+        val sixthFib = FibCalc(6)
+
+
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+            Snackbar.make(view, "Replace with your own action, the 6th fibonacci number is ".plus(sixthFib.toString()), Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
+    }
+
+    fun FibCalc(numberToGo: Int): Int{
+        if(numberToGo == 0){
+            return 0
+        }
+        else if(numberToGo == 1){
+            return 1
+        }
+        return FibCalcRecurse(numberToGo -2 , 0,1)
+    }
+
+    fun FibCalcRecurse(stepsLeft: Int, prevNum: Int, currNum: Int): Int{
+        if(stepsLeft == 0) return  currNum
+        val nextNum = prevNum + currNum
+        return FibCalcRecurse(stepsLeft -1, currNum, nextNum)
     }
 }
